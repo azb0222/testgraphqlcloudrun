@@ -10,12 +10,10 @@ COPY . .
 ENV DATABASE_URL="postgresql://backend-tf-23234:us-central1:asritha@35.238.130.232:5432/test"
 ENV NODE_ENV="development"
 
+RUN npx prisma generate
+
 CMD [ "npm", "start" ]
 
-
-
-
-# npx prisma migrate deploy : command to overide for job 
 
 # u run the commands locally: (when testing locally, they will have to spin up their own postgres or some shit locally). dont use the dockerfile cuz the database_url shit is fucked 
 # 1) npx prisma migrate dev --name add-post-model. to create new migrations and apply those changes to database. 
