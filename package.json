@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./index.js"
+    "dev": "concurrently \"yarn generate:prisma\" \"yarn codegen --watch\" \"ts-node-dev --respawn --transpile-only --exit-child src/index.ts\"",
+    "start": "node index",
+    "clean": "rm -rf dist",
+    "build": "yarn -s run clean && yarn -s run generate:prisma",
+    "codegen": "graphql-codegen --config codegen.yml",
+    "generate:prisma": "prisma generate",
+    "migrate:prisma": "npx prisma migrate dev",
+    "seed:prisma": "npx prisma db seed" 
   },
   "keywords": [],
   "author": "",

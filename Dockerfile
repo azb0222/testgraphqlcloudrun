@@ -1,18 +1,20 @@
-FROM node:22-alpine
+FROM node:20-alpine
 
+# Create app directory
 WORKDIR /usr
 
-COPY package.json ./
-RUN npm install
+# Install app dependencies
+COPY package.json yarn.lock ./
+
+RUN yarn install
 
 COPY . .
 
+RUN yarn build
+
 ENV NODE_ENV="development"
 
-RUN npx prisma generate
-
-CMD [ "npm", "start" ]
-
+CMD ["yarn", "start"]
 
 # u run the commands locally: (when testing locally, they will have to spin up their own postgres or some shit locally). dont use the dockerfile cuz the database_url shit is fucked 
 # 1) npx prisma migrate dev --name add-post-model. to create new migrations and apply those changes to database. 
