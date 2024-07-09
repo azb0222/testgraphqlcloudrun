@@ -7,7 +7,6 @@ RUN npm install
 
 COPY . .
 
-ENV DATABASE_URL="postgresql://backend-tf-23234:us-central1:asritha@35.238.130.232:5432/test"
 ENV NODE_ENV="development"
 
 RUN npx prisma generate
